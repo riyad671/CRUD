@@ -15,7 +15,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-sm-6 pt-2">
-            <form action="/action_page.php">
+            <form action="" method="POST">
+                @csrf
                 <div class="form-group">
                 {{-- <label for="title">Title:</label> --}}
                 <input type="title" class="form-control" id="title" placeholder="Enter title" name="title">
