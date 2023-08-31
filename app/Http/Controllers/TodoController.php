@@ -7,9 +7,19 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-    public function index()
+    public function index($todo_id = null)
     {
-        return view('welcome', ['todos' => Todo::latest()->get()]);
+        $todo = null;
+        if ($todo_id != null) {
+            $todo = Todo::whereId($todo_id)->first();
+        }
+        return view(
+            'welcome',
+            [
+                'todo' => $todo,
+                'todos' => Todo::latest()->get()
+            ]
+        );
     }
 
     public function store(Request $request)
@@ -22,5 +32,15 @@ class TodoController extends Controller
         $todo->save();
 
         return back();
+    }
+
+    public function update(Request $request, $todo_id)
+    {
+        $todo = Todo::findOrFail($todo_id);
+
+        $todo->title = $request->title;
+        $todo->save();
+
+        return redirect('/');
     }
 }

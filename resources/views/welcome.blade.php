@@ -15,11 +15,17 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-6 pt-2">
-                <form action="" method="POST">
+                <form action="{{ isset($todo) ? route('update-todo', ['todo'=>$todo->id]): route('store-todo') }}" method="POST">
+                    
                     @csrf
+
+                    @if(isset($todo))
+                        @method('PUT')
+                    @endif
+
                     <div class="form-group">
                     {{-- <label for="title">Title:</label> --}}
-                    <input type="title" class="form-control" id="title" placeholder="Enter title" name="title">
+                    <input type="title" class="form-control" id="title" placeholder="Enter title" name="title" value="{{ $todo->title ?? '' }}">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -35,7 +41,11 @@
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
                                 <td>{{ $todo->title }}</td>
-                                <td>Edit and Delete</td>
+                                <td>
+                                    <a href="/edit/{{ $todo->id }}" class="btn brn-sm btn-dark">
+                                        Edit
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
