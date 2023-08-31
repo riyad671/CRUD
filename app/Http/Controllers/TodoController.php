@@ -9,7 +9,7 @@ class TodoController extends Controller
 {
     public function index()
     {
-        return view('welcome', ['todos' => Todo::get()]);
+        return view('welcome', ['todos' => Todo::latest()->get()]);
     }
 
     public function store(Request $request)
