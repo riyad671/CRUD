@@ -10,22 +10,38 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-sm-6 pt-2">
-            <form action="" method="POST">
-                @csrf
-                <div class="form-group">
-                {{-- <label for="title">Title:</label> --}}
-                <input type="title" class="form-control" id="title" placeholder="Enter title" name="title">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-6 pt-2">
+                <form action="" method="POST">
+                    @csrf
+                    <div class="form-group">
+                    {{-- <label for="title">Title:</label> --}}
+                    <input type="title" class="form-control" id="title" placeholder="Enter title" name="title">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Serial</th>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($todos as $todo)
+                            <tr>
+                                <td>{{ $loop->index+1 }}</td>
+                                <td>{{ $todo->title }}</td>
+                                <td>Edit and Delete</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-
 </body>
 </html>
