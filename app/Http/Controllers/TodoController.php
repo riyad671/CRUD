@@ -10,4 +10,9 @@ class TodoController extends Controller
     {
         return view('welcome');
     }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }
